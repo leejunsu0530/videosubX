@@ -3,17 +3,17 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["translatevideo*"]
+include = ["videosubx*"]
 
 [project]
-name = "translate-video"
+name = "videosubX"
 version = "0.1.0"
 authors = [
     { name = "leejunsu0530", email = "leejunsu0530@gmail.com" }
 ]
 description = "translate video images and audio"
 readme = "README.md"
-requires-python = ">=3.11,<3.14" # paddlepaddle 때문에 13으로 제한. 3.12 이하면 <3.13이라 적어야 3.12.1 등을 포함함
+requires-python = ">=3.11,<3.14" # paddlepaddle, whisperx 때문에 13으로 제한. 3.12 이하면 <3.13이라 적어야 3.12.1 등을 포함함
 keywords = ["translate", "translation", "whisper", "whisperx", "ocr", "video", "audio", "subtitle"]
 license = { file = "LICENSE" }
 classifiers = [

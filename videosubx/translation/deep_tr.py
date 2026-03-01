@@ -1,6 +1,6 @@
 from deep_translator import GoogleTranslator
 from .base import TranslatorBase
-from ..utils.type_hints import LanguageNames
+from ..utils.types import LanguageNames
 
 """언어는 언어 이름(english)이나 약어(en)로 전달 가능"""
 

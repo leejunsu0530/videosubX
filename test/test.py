@@ -1,4 +1,4 @@
-from translatevideo import WhisperXTranscriber
+from videosubx import WhisperXTranscriber
 from pprint import pprint
 from pathlib import Path
 import yt_dlp
