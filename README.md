@@ -110,6 +110,16 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
 - [ ] Gradio 기반 GUI 지원
 - [ ] faster-whisper, whisper.cpp 추가 지원
 - [ ] 전사 부분에 인자 추가 지원
+------
+### yt-dlp 부분 TODO
+- [ ] gradio 기반 gui
+- [ ] optparse로 ytdlp의 인자 설명 추가
+- [ ] 다운받은 파일의 메타데이터 열람 및 수정
+- [ ] 챕터 수정용 gui
+- [ ] 커스텀 pp, 필터 추가
+- [ ] 챕터별 썸네일 pp, 자동자막 생성 pp 등 추가
+- [ ] 자체 파일탐색기 - 조건을 통한 파일 탐색, 파일들의 폴더 관리, 엘범 등의 메타데이터 관리 
+- [ ] 더 빠른 info 다운로드(멀티스레딩)
 
 ## License
 이 프로젝트는 MIT 라이선스 하에 보호받고 있습니다. 자세한 정보는 LICENSE 파일을 참조하세요.
