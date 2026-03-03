@@ -38,8 +38,9 @@ pwcpp = ["pywhisercpp"]
 dev = ["pip-licenses"]
 
 [project.scripts]
-tr-video = "translatevideo:main" # 모듈경로:함수이름 구조
+vidsubx = "videosubx:main" # 모듈경로:함수이름 구조
+vidsubx-gui = "videosubx.gui:main"
 
 [project.urls]
-Homepage = "https://github.com/leejunsu0530/translate-video"
-Repository = "https://github.com/leejunsu0530/translate-video"
+Homepage = "https://github.com/leejunsu0530/videosubX"
+Repository = "https://github.com/leejunsu0530/videosubX"

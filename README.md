@@ -99,6 +99,8 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
    ```
 
 ## Usage
+1. pip로 설치해서 엔트리포인트로 vidsubx --arg...로 실행. 또는 vidsubx-gui로 실행
+2. 제공하는 exe 설치관리자로 설치 및 기본폴더 생성
 ### python
 ### GUI(Gradio)
 
