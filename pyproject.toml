@@ -24,10 +24,11 @@ dependencies = [ # paddlepaddle, torch는 별도 설치
     "whisperx @ git+https://github.com/m-bain/whisperX",
     "deep-translator",
     "rich",
+    "yt-dlp[default,curl-cffi]",
+    "gradio"
     # "transformers",
     # "opencv-python",
     # "paddleocr",
-    # "yt-dlp[default,curl-cffi]",
     
 ]
 
