@@ -31,6 +31,29 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
       # on Windows using Scoop (https://scoop.sh/)
       scoop install ffmpeg
       ```
+      <!--
+      실행중 C:\Users\leeju\Projects\videosubX\.venv\Lib\site-packages\pyannote\audio\core\io.py:47: UserWarning:
+      torchcodec is not installed correctly so built-in audio decoding will fail. Solutions are:
+      * use audio preloaded in-memory as a {'waveform': (channel, time) torch.Tensor, 'sample_rate': int} dictionary;
+      * fix torchcodec installation. Error message was:
+      
+      Could not load libtorchcodec. Likely causes:
+                1. FFmpeg is not properly installed in your environment. We support
+                   versions 4, 5, 6, 7, and 8, and we attempt to load libtorchcodec
+                   for each of those versions. Errors for versions not installed on
+                   your system are expected; only the error for your installed FFmpeg
+                   version is relevant. On Windows, ensure you've installed the
+                   "full-shared" version which ships DLLs.
+                2. The PyTorch version (2.8.0+cpu) is not compatible with
+                   this version of TorchCodec. Refer to the version compatibility
+                   table:
+                   https://github.com/pytorch/torchcodec?tab=readme-ov-file#installing-torchcodec.
+                3. Another runtime dependency; see exceptions below.
+      
+              The following exceptions were raised as we tried to load libtorchcodec:
+      이런 경고가 떴는데, 그 해결책으로 full-shared 빌드 설치 시도중. 이게 문제점이 맞았고 해결책이라면 명령어를 아래와 같이 수정할 필요 있음(해당 명령어 출처: https://www.gyan.dev/ffmpeg/builds/)
+      scoop install ffmpeg-shared
+      winget install "FFmpeg (Shared)" -->
       
       위의 명령어에 실패하면 수동 설치를 할 수도 있다.
       [Windows builds from gyan.dev](https://www.gyan.dev/ffmpeg/builds/) 또는 [Windows builds by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)에 들어가서 압축 파일을 다운받아 원하는 폴더에 압축 해제하고 해당 폴더 내 bin 폴더를 시스템 환경변수의 Path에 설정하면 된다.
@@ -59,7 +82,7 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
       추가 정보는 yt-dlp의 [Wiki](https://github.com/yt-dlp/yt-dlp/wiki/EJS)를 참조하라.
    </details>
 
-2. Installing Dependency Library
+3. Installing Dependency Library
 
    다른 종속성 라이브러리는 이 라이브러리에서 자동으로 설치하지만 paddlepaddle과 torch는 최상의 결과를 위해서 수동 설치가 필요하다.
 
@@ -84,7 +107,7 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
    </details>
    
 
-3. Installing translate-video
+4. Installing translate-video
    
    > 추후 pypi에서도 지원할 예정임
    
