@@ -13,21 +13,21 @@ TODO:
 - 나중에 다중상속 고려한 설계
 """
 
-import whisperx  # type: ignore
+import whisperx  
 import gc
 import torch
 import platform
 import subprocess
-from whisperx.vads import Vad   # type: ignore
-from whisperx.schema import AlignedTranscriptionResult, TranscriptionResult  # type: ignore
-from whisperx.utils import LANGUAGES, optional_int, str2bool  # type: ignore
+from whisperx.vads import Vad   
+from whisperx.schema import AlignedTranscriptionResult, TranscriptionResult  
+from whisperx.utils import LANGUAGES, optional_int, str2bool  
 from typing import Literal, Optional, Any
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np
 from rich import print
 
-# from whisperx.diarize import DiarizationPipeline  # type: ignore
+# from whisperx.diarize import DiarizationPipeline  
 
 
 from videosubx.utils.types import LanguageNames
@@ -72,15 +72,15 @@ class AsrOptions:
     beam_size: optional_int = 5
     patience: float = 1.0
     length_penalty: float = 1.0
-    temperatures: list[float] = 0
-    compression_ratio_threshold
-    log_prob_threshold
-    no_speech_threshold
-    condition_on_previous_text
-    initial_prompt
-    hotwords
-    suppress_tokens
-    suppress_numerals
+    temperatures: list[float] = [0]
+    compression_ratio_threshold = None
+    log_prob_threshold = None
+    no_speech_threshold = None
+    condition_on_previous_text = None
+    initial_prompt = None
+    hotwords = None
+    suppress_tokens = None
+    suppress_numerals = None
 
 
 @dataclass
@@ -205,7 +205,7 @@ class WhisperXTranscriber:
         if self._diarize_model is None:
             from whisperx.diarize import DiarizationPipeline  # type: ignore
             self._diarize_model = DiarizationPipeline(
-                use_auth_token=self.hf_token, device=self.device
+                token=self.hf_token, device=self.device
             )
         return self._diarize_model
 

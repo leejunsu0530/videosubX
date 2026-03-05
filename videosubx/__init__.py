@@ -1,10 +1,20 @@
 # pylint: disable=wrong-import-position
-from importlib.metadata import version, PackageNotFoundError
 import warnings  # surpress torchaudio deprecation warning
+from importlib.metadata import version, PackageNotFoundError
+from rich.console import Console
+from time import time
+console = Console()
+
+
 print("[Note] torchaudio._backend.list_audio_backends deprecation warning is suppressed.")
 warnings.filterwarnings("ignore", category=UserWarning,
                         message=".*torchaudio._backend.list_audio_backends has been deprecated.*")
-from .transcription.transcribe import WhisperXTranscriber  # noqa: E402
+
+# 임시로 로딩과 시간 부분을 추가. 나중에는 로딩 로깅으로 수정.
+srt = time()
+with console.status("[bold green]Importing videosubX...") as status:
+    from .transcription.transcribe import WhisperXTranscriber  # noqa: E402
+print(f"videosubX imported in {time() - srt:.2f} seconds.")
 
 # versioning
 try:

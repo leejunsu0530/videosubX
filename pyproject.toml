@@ -20,12 +20,15 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License"
 ]
+# torchcodec 호환성은 https://github.com/meta-pytorch/torchcodec?tab=readme-ov-file#installing-torchcodec 참고.
+# torch 버전과 맞춰야 함. whisperx 3.8.1은 "torch~=2.8.0"라 하니 torchcodec은 0.7로 고정
 dependencies = [ # paddlepaddle, torch는 별도 설치
-    "whisperx @ git+https://github.com/m-bain/whisperX",
+    "whisperx~=3.8.1", 
     "deep-translator",
     "rich",
     "yt-dlp[default,curl-cffi]",
-    "gradio"
+    "gradio",
+    "torchcodec<0.8"
     # "transformers",
     # "opencv-python",
     # "paddleocr",
