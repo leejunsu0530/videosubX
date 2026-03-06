@@ -9,9 +9,22 @@
 #     # ydl.prepare_outtmpl()
 #     # ydl.parse_outtmpl()
 from rich.console import Console
+from shutil import which
+import os
+from pathlib import Path
+
 print("코드 실행됨")
 
 console = Console()
+ffmpeg_path = which("ffmpeg")
+if ffmpeg_path is None:
+    console.print("[bold red]Error: ffmpeg is not installed or not found in PATH.[/bold red]")
+    exit(1)
+ffmpeg_bin = Path(ffmpeg_path).parent
+print(f"ffmpeg found at: {ffmpeg_bin}")
+
+os.add_dll_directory(str(ffmpeg_bin))
+
 with console.status("[bold green]Importing videosubX...") as status:
     print("whisperx")
     import whisperx
