@@ -20,10 +20,10 @@ warnings.filterwarnings("ignore", category=UserWarning,
 # print(f"videosubX imported in {time() - srt:.2f} seconds.")
 
 # ffmpeg 경로 추가 후 whisperx.vad 임포트
-ffmpeg_bin_path = Path(which("ffmpeg")).parent
-if ffmpeg_bin_path is None:
+ffmpeg_path = which("ffmpeg")
+if ffmpeg_path is None:
     raise RuntimeError("ffmpeg is not installed or not found in PATH.")
-os.add_dll_directory(str(ffmpeg_bin_path))
+os.add_dll_directory(str(Path(ffmpeg_path).parent))
 from .transcription.transcribe import WhisperXTranscriber  # noqa: E402
 
 # versioning
