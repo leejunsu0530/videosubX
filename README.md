@@ -104,6 +104,10 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 ### GUI(Gradio)
 
 ## TODO
+- [ ] cli to api 몽키패치 해결
+- [ ] yt dlp 인자 파싱, regex 해석 > help, 구문강조 구현
+- torchcodec 오류 해결 
+
 - [ ] paddleocr 기반 이미지/영상 자막 생성 지원
 - [ ] 구글, deepl, marianMT, NLLB, MBart 등 다양한 번역기 지원
 - [ ] cuda 지원
