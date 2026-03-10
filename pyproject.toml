@@ -28,8 +28,8 @@ dependencies = [ # paddlepaddle, torch는 별도 설치
     "rich",
     "yt-dlp[default,curl-cffi]",
     "gradio",
-    "torchcodec<0.8"
-    # "transformers",
+    "torchcodec<0.8",
+    "transformers",
     # "opencv-python",
     # "paddleocr",
     
