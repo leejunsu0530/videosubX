@@ -56,12 +56,12 @@ def parse_cli_args(cli_args: str, cli_defaults=False) -> dict[str, object]:
     return api
 
 
-def highlight_cli(cli_args: str) -> str:
-    """return highlighted html string of CLI arguments"""
-    return ""
+# def highlight_cli(cli_args: str) -> str:
+#     """return highlighted html string of CLI arguments"""
+#     return ""
 
 
-def highlight_api(api_opts: dict[str, object], pretty: bool = True) -> str:
+def highlight_dict(api_opts: dict[str, object], pretty: bool = True) -> str:
     """return highlighted html string of API options"""
     return ""
 
@@ -70,6 +70,6 @@ def parse_opts():
     """가능한 옵션들과 설명, 자료형 등을 반환"""
 
 
-def parse_outtmpl():
-    """%(title)s.%(ext)s와 같은 출력 템플릿을 분석
-    값 채워넣기(미리보기에 쓰거나 Path 업데이트에 사용)는 별도로"""
+# def parse_outtmpl():
+#     """%(title)s.%(ext)s와 같은 출력 템플릿을 분석
+#     값 채워넣기(미리보기에 쓰거나 Path 업데이트에 사용)는 별도로"""
