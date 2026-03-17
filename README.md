@@ -136,6 +136,7 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 - [ ] 다운로드 중 유튜브 차단이 걸리면 해당 프로세스를 종료하고 다른 프로세스에서 이어감
 - [ ] 플레이리스트를 개별 영상 파일들로 쪼개기
 - [ ] pp에 인자 전달 방법 및 기본 시점 정의하는 방법 찾기
+- [ ] exe 파일로 사용할 경우에 라이브러리 업데이트가 안되니까, 외부 ytdlp 경로와 연결 가능하게 하기
 
 ## License
 이 프로젝트는 MIT 라이선스 하에 보호받고 있습니다. 자세한 정보는 LICENSE 파일을 참조하세요.
