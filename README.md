@@ -104,10 +104,7 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 ### GUI(Gradio)
 
 ## TODO
-- [ ] cli to api 몽키패치 해결
-- [ ] yt dlp 인자 파싱, regex 해석 > help, 구문강조 구현
-- torchcodec 오류 해결 
-
+- [x] torchcodec 오류 해결 
 - [ ] paddleocr 기반 이미지/영상 자막 생성 지원
 - [ ] 구글, deepl, marianMT, NLLB, MBart 등 다양한 번역기 지원
 - [ ] cuda 지원
@@ -117,6 +114,7 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 - [ ] 전사 부분에 인자 추가 지원
 ------
 ### yt-dlp 부분 TODO
+- [ ] cli to api 몽키패치 해결
 - [ ] gradio 기반 gui
     - [ ] 챕터 수정용 gui
     - [ ] 다운로드 형식 선택기
@@ -136,6 +134,9 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 - [ ] 다운로드 중 유튜브 차단이 걸리면 해당 프로세스를 종료하고 다른 프로세스에서 이어감
 - [ ] 플레이리스트를 개별 영상 파일들로 쪼개기
 - [ ] pp에 인자 전달 방법 및 기본 시점 정의하는 방법 찾기
+- [ ] exe 파일로 사용할 경우에 라이브러리 업데이트가 안되니까, 외부 ytdlp 경로와 연결 가능하게 하기
+- [ ] 버전 확인 및 업데이트 스크립트
+- [ ] 외부 경로 쪽 관리 스크립트
 
 ## License
 이 프로젝트는 MIT 라이선스 하에 보호받고 있습니다. 자세한 정보는 LICENSE 파일을 참조하세요.
