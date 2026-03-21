@@ -30,6 +30,7 @@ dependencies = [ # paddlepaddle, torch는 별도 설치
     "gradio",
     "torchcodec<0.8",
     "transformers",
+    "hf_xet",
     # "opencv-python",
     # "paddleocr",
     
