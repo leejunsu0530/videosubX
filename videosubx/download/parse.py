@@ -1,6 +1,11 @@
 """
+사용자의 cli 옵션 해석, 도움말 출력, 구문 강조를 처리
+
 Note that part of the code is from https://github.com/yt-dlp/yt-dlp/blob/master/devscripts/cli_to_api.py
 Last commit was at Aug 7, 2025
+
+TODO:
+몽키패치 수정 - 어쩌면 전체를 클래스나 함수로 묶어서 지역변수로 만들어버리면?
 """
 # Allow direct execution
 import yt_dlp
