@@ -13,6 +13,7 @@ import yt_dlp.options
 from shlex import split as shlex_split  # shlex로 처리해도 딱히 결과에 문제는 없었음
 from pprint import pformat
 from rich.pretty import pprint, Pretty
+from .types import InfoDict
 
 _create_parser = yt_dlp.options.create_parser
 
@@ -66,7 +67,7 @@ def cli_to_api(cli_args: str, cli_defaults=False) -> dict[str, object]:
     return api
 
 
-def highlight_dict(api_opts: dict[str, object], pretty: bool = True) -> str:
+def highlight_dict(ydl_opts: dict[str, object], pretty: bool = True) -> str:
     """return highlighted html string of API options"""
     return ""
 
@@ -91,7 +92,7 @@ class YdlOptHelper:
     def find_option_from_keyword(self, user_input: str):
         """입력한 내용이 포함된 help를 가진 옵션들을 출력"""
 
-    def show_output_template(self, outtmpl: str, info_dict: dict):
+    def show_output_template(self, outtmpl: str, info_dict: InfoDict):
         """값을 넣어서 완성된 출력 템플릿 예시를 보여줌"""
 
     def get_option_parser(self, option_name: str):
