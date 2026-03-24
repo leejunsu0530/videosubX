@@ -48,7 +48,12 @@ def _cli_to_api(opts, cli_defaults=False):
     return diff
 
 
-def parse_cli_args(cli_args: str, cli_defaults=False) -> dict[str, object]:
+# def highlight_cli(cli_args: str) -> str:
+#     """return highlighted html string of CLI arguments"""
+#     return ""
+
+
+def cli_to_api(cli_args: str, cli_defaults=False) -> dict[str, object]:
     """
     Args:
         args: A string of CLI arguments, e.g. "yt-dlp --format "bv[height<=720]+ba" --output '%(title)s.%(ext)s' URL". 'yt-dlp' can be omitted.
@@ -61,20 +66,40 @@ def parse_cli_args(cli_args: str, cli_defaults=False) -> dict[str, object]:
     return api
 
 
-# def highlight_cli(cli_args: str) -> str:
-#     """return highlighted html string of CLI arguments"""
-#     return ""
-
-
 def highlight_dict(api_opts: dict[str, object], pretty: bool = True) -> str:
     """return highlighted html string of API options"""
     return ""
 
 
-def parse_opts():
-    """가능한 옵션들과 설명, 자료형 등을 반환"""
+class YdlOptHelper:
+    """넣은 값에 따라 옵션을 찾아줌. 그리고 그 옵션의 여러 값들을 알려줌
+    """
 
+    def __init__(self):
+        """일련의 그룹명, 옵션들과 설명(즉, 띄울 최소 정보)을 딕셔너리 쌍으로 해서 가져옴. 
+        대조한 후 필요할 때마다(유저가 옵션 검색뿐만 아니라 옵션을 실제로 목록에 넣었을 때) 나머지 metavars 등까지 파서에서 불러옴."""
+        self.parser = None
 
-# def parse_outtmpl():
-#     """%(title)s.%(ext)s와 같은 출력 템플릿을 분석
-#     값 채워넣기(미리보기에 쓰거나 Path 업데이트에 사용)는 별도로"""
+    def find_option_from_name(self, user_input: str, consider_capital: bool = False):
+        """
+        입력한 내용으로 시작하는 것을 먼저 출력하고, 그게 중간에 들어가는 것 등을 그 아래에 출력
+        Args:
+            user_input: 유저가 입력한 옵션의 일부
+            consider_capital: 대소문자 구분을 신경쓸지 여부
+        """
+
+    def find_option_from_keyword(self, user_input: str):
+        """입력한 내용이 포함된 help를 가진 옵션들을 출력"""
+
+    def show_output_template(self, outtmpl: str, info_dict: dict):
+        """값을 넣어서 완성된 출력 템플릿 예시를 보여줌"""
+
+    def get_option_parser(self, option_name: str):
+        """말 그대로 옵션의 파서를 불러옴."""
+    
+    def get_option_info(self, option_name:str):
+        """"""
+        parser = self.get_option_parser(option_name)
+        return {
+            "help": parser.help
+        }
