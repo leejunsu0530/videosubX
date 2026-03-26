@@ -109,9 +109,10 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 - [ ] 구글, deepl, marianMT, NLLB, MBart 등 다양한 번역기 지원
 - [ ] cuda 지원
 - [ ] pypi 지원
-- [ ] Gradio 기반 GUI 지원
 - [ ] faster-whisper, whisper.cpp 추가 지원
 - [ ] 전사 부분에 인자 추가 지원
+
+- [ ] gui로 gradio가 무거워보여서, pyqt, dear pygui, streamlit 중 고민중
 ------
 ## yt-dlp 관련
 
