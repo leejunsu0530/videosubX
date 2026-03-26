@@ -101,9 +101,18 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 1. pip로 설치해서 엔트리포인트로 vidsubx --arg...로 실행. 또는 vidsubx-gui로 실행
 2. 제공하는 exe 설치관리자로 설치 및 기본폴더 생성
 ### python
-### GUI(Gradio)
+### GUI
 
 ## TODO
+gui는 pyqt로 하고, 정적인 부분은 qt designer로, 동적인(yt-dlp 옵션 부분 등) 부분은 내가 코드로 직접 구현. 그리고 ui와 백앤드 사이에 
+```
+Core (yt-dlp, ffmpeg, AI 처리)
+↓
+Service Layer (옵션 처리, 상태 관리)
+↓
+UI (Qt)
+```
+이런 구조로 해야 함. 관련 내용은 노트 참조.
 - [x] torchcodec 오류 해결 
 - [ ] paddleocr 기반 이미지/영상 자막 생성 지원
 - [ ] 구글, deepl, marianMT, NLLB, MBart 등 다양한 번역기 지원
@@ -112,7 +121,6 @@ python -m uv pip install -U git+https://github.com/leejunsu0530/translate-video
 - [ ] faster-whisper, whisper.cpp 추가 지원
 - [ ] 전사 부분에 인자 추가 지원
 
-- [ ] gui로 gradio가 무거워보여서, pyqt, dear pygui, streamlit 중 고민중
 ------
 ## yt-dlp 관련
 
