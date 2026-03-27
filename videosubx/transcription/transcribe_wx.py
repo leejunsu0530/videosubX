@@ -30,9 +30,9 @@ from rich import print
 # from whisperx.diarize import DiarizationPipeline  
 
 
-from videosubx.utils.types import LanguageNames
-from videosubx.utils.types import LanguageCodes
-from videosubx.utils.types import WhisperModels
+from .types import LanguageNames
+from .types import LanguageCodes
+from .types import WhisperModels
 
 
 @dataclass

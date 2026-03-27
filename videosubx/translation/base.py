@@ -1,5 +1,5 @@
 from pathlib import Path
-from ..utils.types import LanguageNames
+from ..transcription.types import LanguageNames
 
 
 class TranslatorBase:

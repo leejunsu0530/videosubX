@@ -1,5 +1,6 @@
 """
-아래 코드 수정해서 공통 부분만 남김(가비지 컬렉터나 오디오 쪼개서 가져오기, vad 전사 강제정렬 화자분리의 틀 등)"""
+아래 코드 수정해서 공통 부분만 남김(가비지 컬렉터나 오디오 쪼개서 가져오기, vad 전사 강제정렬 화자분리의 틀 등)
+상속이나 base 관련 내용이므로, 삽질하지 않으려면 **class 공부한 후** 만들기"""
 
 import whisperx  
 import gc
@@ -15,77 +16,15 @@ from pathlib import Path
 import numpy as np
 from rich import print
 
-# from whisperx.diarize import DiarizationPipeline  
 
-
-from videosubx.utils.types import LanguageNames
-from videosubx.utils.types import LanguageCodes
-from videosubx.utils.types import WhisperModels
-
-
-@dataclass
-class AsrOptions:
+class TranscriberBase:
     """
-    parser.add_argument("--beam_size", type=optional_int, default=5, help="number of beams in beam search, only applicable when temperature is zero")
-    parser.add_argument("--patience", type=float, default=1.0, help="optional patience value to use in beam decoding, as in https://arxiv.org/abs/2204.05424, the default (1.0) is equivalent to conventional beam search")
-    parser.add_argument("--length_penalty", type=float, default=1.0, help="optional token length penalty coefficient (alpha) as in https://arxiv.org/abs/1609.08144, uses simple length normalization by default")
-    parser.add_argument("--length_penalty", type=float, default=1.0, help="optional token length penalty coefficient (alpha) as in https://arxiv.org/abs/1609.08144, uses simple length normalization by default")
-    parser.add_argument("--temperature", type=float, default=0, help="temperature to use for sampling")
-
-    여기 인자에서, 이걸 전해줄 때 asr에 직접 주는게 아니라 함수 내 인자로 전해줌. 사용가능한 인자의 종류가 어떻게 되는지 확인 필요
-    여기서 init으로 값을 받는 것뿐만 아니라 연산도 행할 수 있는지, 전해줄 때는 어떻게 값을 주고 받아야 하는지
-    parser에 넣은 help값 등은 건들 수 있는지?
-
-    여기 인자는 main에서 호출한 transcribe.py에서 인자로 준걸 해석해서 아래의 asr options로 
-    전해주고 여기서 load model 함수의 asr options 인자에 넣음. 
-    그러면 load model에서 default asr options를 업데이트함.
-    이론상으로 나는 아래의, cli에서 전해주는 인자뿐만 아니라 asr.py의 모든 인자를 전부 여기 정의해놓아도 됨. 
-    내가 help를 적을 수 있는 건 cli의 인자만 되지만
-
-    asr_options = {
-        "beam_size": args.pop("beam_size"),
-        "patience": args.pop("patience"),
-        "length_penalty": args.pop("length_penalty"),
-        "temperatures": temperature,
-        "compression_ratio_threshold": args.pop("compression_ratio_threshold"),
-        "log_prob_threshold": args.pop("logprob_threshold"),
-        "no_speech_threshold": args.pop("no_speech_threshold"),
-        "condition_on_previous_text": False,
-        "initial_prompt": args.pop("initial_prompt"),
-        "hotwords": args.pop("hotwords"),
-        "suppress_tokens": [int(x) for x in args.pop("suppress_tokens").split(",")],
-        "suppress_numerals": args.pop("suppress_numerals"),
-    }
+    공통적인 부분:
+    - 오디오 청킹 및 불러오기(파일로 하든 제너레이터+온라인에서 끊어서 가져오기로 하든)
+    - vad, 전사, 화자구분, 강제정렬의 일련의 과정 틀 잡아놓기(사용자가 원하는 거 넣을 수 있도록?)
+    - 가비지 컬렉터 부분
+    - 로깅 부분?
     """
-    beam_size: optional_int = 5
-    patience: float = 1.0
-    length_penalty: float = 1.0
-    temperatures: list[float] = [0]
-    compression_ratio_threshold = None
-    log_prob_threshold = None
-    no_speech_threshold = None
-    condition_on_previous_text = None
-    initial_prompt = None
-    hotwords = None
-    suppress_tokens = None
-    suppress_numerals = None
-
-
-@dataclass
-class VadArgs:
-    vad_model: Optional[Vad] = None
-    vad_method: Literal["pyannote", "silero"] = "silero"
-
-
-@dataclass
-class DiarizeArgs:
-    hf_token: Optional[str] = None
-    min_speakers: Optional[int] = None
-    max_speakers: Optional[int] = None
-    num_speakers: Optional[int] = None
-
-
-class WhisperXTranscriber:
     def __init__(self,
                  whisper_model_name: WhisperModels = "medium",
                  chunk_audio_minutes: Optional[float] = None,
