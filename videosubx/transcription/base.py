@@ -14,10 +14,12 @@ import numpy as np
 class TranscriberBase:
     """
     공통적인 부분:
+    - 모델 다운로드, 양자화 처리
     - 오디오 청킹 및 불러오기(파일로 하든 제너레이터+온라인에서 끊어서 가져오기로 하든)
     - vad, 전사, 화자구분, 강제정렬의 일련의 과정 틀 잡아놓기(사용자가 원하는 거 넣을 수 있도록?)
     - 가비지 컬렉터 부분
     - 로깅 부분?
+    - ov base도 만들고, 변환 후 저장해서 다음에는 그거로 불러오게 하기
     """
 
     def __init__(self) -> None:
@@ -28,12 +30,15 @@ class TranscriberBase:
         for obj in objects:
             del obj
         gc.collect()
-        torch.cuda.empty_cache()
+        torch.cuda.empty_cache
 
     def load_audio(self):
         pass
 
     def get_audio_duration(self):
+        pass
+
+    def download_model(self):
         pass
 
     def transcribe(self):
