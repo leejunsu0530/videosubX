@@ -32,6 +32,7 @@ dependencies = [ # paddlepaddle, torch는 별도 설치
     "transformers",
     "hf_xet",
     "accelerate",
+    "silero-vad",
     # "opencv-python",
     # "paddleocr",
     
