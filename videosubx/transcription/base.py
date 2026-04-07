@@ -95,13 +95,6 @@ class TranscriberBase(ABC):
 
         self.logger = logger or self._default_logger()
 
-    @staticmethod
-    def _delete_object(*objects: Any) -> None:
-        for obj in objects:
-            del obj
-        gc.collect()
-        torch.cuda.empty_cache()
-
     def load_audio(self,
                    audio_path_or_url: str | Path,
                    use_vad: bool = True,
