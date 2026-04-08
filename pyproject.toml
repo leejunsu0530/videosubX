@@ -52,3 +52,7 @@ vidsubx-gui = "videosubx.gui:main"
 [project.urls]
 Homepage = "https://github.com/leejunsu0530/videosubX"
 Repository = "https://github.com/leejunsu0530/videosubX"
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = ["typings"]
