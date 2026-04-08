@@ -120,6 +120,7 @@ UI (Qt)
 - [ ] pypi 지원
 - [ ] faster-whisper, whisper.cpp 추가 지원
 - [ ] 전사 부분에 인자 추가 지원
+- [ ] 파인튜닝, 양자화 창도 지원
 
 ------
 ## yt-dlp 관련
