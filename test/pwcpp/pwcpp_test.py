@@ -18,11 +18,16 @@ def check_available_devices_ov() -> list[str]:
 # d = check_available_devices_ov()
 # print(d)
 
+
 srt = time()
 model = Model(  # 여기 params는 PARAMS_SCHEMA임. 아래 transcribe도 그렇다고 함
-    'large-v3-turbo',  # 'large-v3-turbo-q8_0',
+    # "base-q5_1",
+    # 'large-v3-turbo-q5_0',
+    r"C:\Users\leeju\Projects\videosubX\test\pwcpp\ggml-kotoba-whisper-v2.0-q5_0.bin",
+    # 지금 n_thread 같은거 4로 해놔서 그런진 모르겠는데 터보나 코토바는 버겁게 돌아감. vs 끄고 다시 시도해봐야 함.
+
     use_openvino=True,
-    openvino_device='NPU',
+    openvino_device='GPU',  # 어처피 npu든 gpu든 점유율 안올라간다. hf로 하기
 
     # 출력 관련 옵션들
     # 기본은 tqdm과 t0=0, t1=140, text=Bella, hello., probability=nan 꼴로 출력
@@ -34,13 +39,15 @@ model = Model(  # 여기 params는 PARAMS_SCHEMA임. 아래 transcribe도 그렇
 
     # vad=True,
     # redirect_whispercpp_logs_to=r"C:\Users\leeju\Projects\videosubX\test\pwcpp\log.txt",
-    # n_threads=4
+    n_threads=4
 )
 
 segments = model.transcribe(
-    r'C:\Users\leeju\Projects\videosubX\test\sample1.mp4',
-    # n_processors=4,
-    new_segment_callback=lambda s:print(f"[{s.t0} --> {s.t1}] {s.text}")
+    # r'C:\Users\leeju\Projects\videosubX\test\sample1.mp4',
+    r"C:\Users\leeju\Desktop\test_15min.mp4",
+    n_processors=4,
+    new_segment_callback=lambda s: print(f"[{s.t0} --> {s.t1}] {s.text}"),
+    language="ja"
 )
 
 # for segment in segments:
