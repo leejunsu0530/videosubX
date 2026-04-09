@@ -206,3 +206,4 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+test/pwcpp/ggml-kotoba-whisper-v2.0-q5_0.bin
