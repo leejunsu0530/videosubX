@@ -25,21 +25,20 @@ dependencies = [ # paddlepaddle, torch는 별도 설치
     "deep-translator",
     "rich",
     "yt-dlp[default,curl-cffi]",
-    # "gradio",
     "transformers",
     "hf_xet",
     "accelerate",
     "silero-vad",
+    "pywhispercpp"
     # "opencv-python",
     # "paddleocr",
     
 ]
 
 [project.optional-dependencies]
-# gui = ["gradio"]
-pwcpp = ["pywhisercpp"]
+# pwcpp = ["pywhisercpp"]
 dev = ["pip-licenses"]
-test = ["datasets", "PySide6", "gradio"] #일단 데모를 gradio로, 실제 구현은 pyside로
+test = ["datasets"] #일단 데모를 gradio로, 실제 구현은 pyside로
 intel = [ # 최신 버전을 위해 github에서 가져옴
     "openvino", 
     "optimum-intel[openvino] @ git+https://github.com/huggingface/optimum-intel.git"
