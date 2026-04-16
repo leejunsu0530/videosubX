@@ -4,13 +4,14 @@
 - whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
 - diarize 모델과 vad 각각 구현
 
-## whisper 관련 메모.
+## whisper 관련 메모
 일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
 - ctranslate2
 - optimum
 - 양자화
-- 파인튜닝
-
+- 파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)
+> distill-whisper는 영어만 지원함
+> 엔비디아가 되면 그냥 다른 cuda 지원 구현들을 쓰면 되고, hf에서 날것 그대로 쓰는 건 optimum의 ov 지원을 위해서다.
 
 ## 전사 관련
 - [ ] Base에서 asr, vad, 화자분리, 강제정렬을 별도 클래스로 만들고 Base를 파이프라인으로 만들어서 조립
