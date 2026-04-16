@@ -10,7 +10,9 @@
 - optimum
 - 양자화
 - 파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)
+
 > distill-whisper는 영어만 지원함
+
 > 엔비디아가 되면 그냥 다른 cuda 지원 구현들을 쓰면 되고, hf에서 날것 그대로 쓰는 건 optimum의 ov 지원을 위해서다.
 
 ## 전사 관련
