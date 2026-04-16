@@ -4,8 +4,15 @@
 - whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
 - diarize 모델과 vad 각각 구현
 
+## whisper 관련 메모.
+일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
+- ctranslate2
+- optimum
+- 양자화
+- 파인튜닝
 
-### 전사 관련
+
+## 전사 관련
 - [ ] Base에서 asr, vad, 화자분리, 강제정렬을 별도 클래스로 만들고 Base를 파이프라인으로 만들어서 조립
 - [ ] asr은 whisperx, hf(+intel optimum), faster-whisper, whisper.cpp 지원
 - [ ] 파인튜닝, 양자화 지원
