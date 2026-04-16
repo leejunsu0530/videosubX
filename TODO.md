@@ -5,9 +5,14 @@
 - diarize 모델과 vad 각각 구현
 
 ## whisper 관련 메모
+TODO:
+1. whisper의 NPU 지원 테스트. 이게 안되면 뒤에 과정 필요없이 whisper.cpp나 faster-whisper로.
+2. 벤치마킹으로 tiny, base, ..., turbo 실 수치 확인. 가장 적합한 모델을 골라야 함
+3. 코토바 데이터로 whisper 파인튜닝
+
 일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
 - ctranslate2
-- optimum
+- optimum(ct2와 양립 불가)
 - onnx
 - 양자화
 - 파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)
