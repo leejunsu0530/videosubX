@@ -8,6 +8,7 @@
 일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
 - ctranslate2
 - optimum
+- onnx
 - 양자화
 - 파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)
 
