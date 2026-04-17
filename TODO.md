@@ -22,7 +22,7 @@ TODO:
 
 > 엔비디아가 되면 그냥 다른 cuda 지원 구현들을 쓰면 되고, hf에서 날것 그대로 쓰는 건 optimum의 ov 지원을 위해서다.
 
-npu에서 whisper 지원 x면 pipe 따로 만들지 말고 whisperx에서 내가 학습시킨 코토바 넣고 사용. 더 성능을 높일 수 없으면 저 파이프라인이 최선이니까
+npu에서 whisper 지원 x면 pipe 따로 만들지 말고 whisperx에서 내가 학습시킨 코토바 넣고 사용. 더 성능을 높일 수 없으면 저 파이프라인이 최선이니까. faster-whisper의 whispermodel을 상속한 whisperx의 모델 클래스는 경로로 지정이 가능함.
 
 ## 전사 관련
 - [ ] Base에서 asr, vad, 화자분리, 강제정렬을 별도 클래스로 만들고 Base를 파이프라인으로 만들어서 조립
