@@ -8,9 +8,13 @@
 TODO:
 1. whisper의 NPU 지원 테스트. 이게 안되면 뒤에 과정 필요없이 whisper.cpp나 faster-whisper로.
 > **시도해봤는데 안돼서 xpu 넣고 해보고, 나오는 성능과 저울질해서 whisperx나 pwcpp int8 멀티스레딩과 비교할듯**
-2. 벤치마킹으로 tiny, base, ..., turbo 실 수치 확인. 가장 적합한 모델을 골라야 함
-3. 코토바 데이터로 whisper 파인튜닝
-4. 중오: diarize npu지원 확인
+
+1. xpu 사용
+2. cpu 사용
+a) ov 사용시 pwcpp
+b) 그냥 프레임워크의 이점은 wx
+어느 쪽이든 int8로 양자화는 하고, 코토바 파인튜닝 필요
+
 
 일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
 - ctranslate2
