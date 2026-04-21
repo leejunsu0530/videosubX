@@ -30,28 +30,28 @@ class TranscriptedSegment:
     speaker: str | None = None
 
 
-class ModelComponentBase(ABC):
-    """VAD, Align, Diarize 공통 베이스"""
-    CONFIG_SCHEMA = {}
+# class ModelComponentBase(ABC):
+#     """VAD, Align, Diarize 공통 베이스"""
+#
+#     def __init__(self, config: dict | None = None):
+#         self.config = config or {}
+#         self._model = None
+#
+#     @abstractmethod
+#     def load(self):
+#         pass
+#
+#     @abstractmethod
+#     def __call__(self, *args, **kwargs):
+#         pass
+#
+#     @property
+#     def is_loaded(self) -> bool:
+#         return self._model is not None
 
-    def __init__(self, config: dict | None = None):
-        self.config = config or {}
-        self._model = None
 
-    @abstractmethod
-    def load(self):
-        pass
-
-    @abstractmethod
-    def __call__(self, *args, **kwargs):
-        pass
-
-    @property
-    def is_loaded(self) -> bool:
-        return self._model is not None
-
-
-class VadBase(ModelComponentBase):
+class VadBase:
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
 
     @abstractmethod
     def __call__(self, audio_stream: Iterable[np.ndarray]) -> Iterable[np.ndarray]:
@@ -59,22 +59,28 @@ class VadBase(ModelComponentBase):
 
 
 class AsrBase:
-    pass
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
 
 
-class AlignModelBase(ModelComponentBase):
+class AlignModelBase:
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
+
     @abstractmethod
     def __call__(self, transcription: Any) -> Any:
         pass
 
 
-class DiarizeModelBase(ModelComponentBase):
+class DiarizeModelBase:
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
+
     @abstractmethod
     def __call__(self, transcription: Any) -> Any:
         pass
 
 
 class TranscribePipeline:
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
+
     pass
 
 
