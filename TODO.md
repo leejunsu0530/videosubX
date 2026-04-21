@@ -11,8 +11,9 @@ TODO:
 
 - 1.xpu 사용
 - 2.cpu 사용
-- a) ov 사용시 pwcpp
-- b) 그냥 프레임워크의 이점은 wx
+- a) ov cpu 사용시 pwcpp
+- b) 그냥 프레임워크의 완성도와 이점은 wx
+- c) xpu 쓰려면 optimum.intel
 - 어느 쪽이든 int8로 양자화는 하고, 코토바 파인튜닝 필요
 
 
