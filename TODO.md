@@ -4,6 +4,8 @@
 - whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
 - diarize 모델과 vad 각각 구현
 
+- mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 근데 이건 파인튜닝인가 어뎁터 부착인가
+
 ## whisper 관련 메모
 TODO:
 1. whisper의 NPU 지원 테스트. 이게 안되면 뒤에 과정 필요없이 whisper.cpp나 faster-whisper로.
