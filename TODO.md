@@ -4,6 +4,8 @@
 - whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
 - diarize 모델과 vad 각각 구현
 
+- whisper int8 ct2 모델 fw에서 테스트 후 리포로 올리기. gpu+ov는 구현 어려워서 그냥 whisperx로
+
 - mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 
 - marianMT는 몇백~몇천만 문장 데이터셋이 필요. 
 - nllb 또는 mbart + lora fine-tuning + int8로 사용
