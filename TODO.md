@@ -5,7 +5,7 @@
 - diarize 모델과 vad 각각 구현
 
 - whisper int8 ct2 모델 fw에서 테스트 후 리포로 올리기. gpu+ov는 구현 어려워서 그냥 whisperx로
-- **목표 및 과정: kotoba 최적화 혹은 작은 모델로 학습,일본어 구어체 어뎁터, 특정 도메인 어뎁터 차례대로 적용. 각 체크포인트에 해당하는 데이터셋 넣고 int8 양자화. 영어는 distill-whisper 사용**
+- **목표 및 과정: kotoba 최적화 혹은 작은 모델로 학습,일본어 구어체 어뎁터, 특정 도메인 어뎁터 차례대로 적용. 그 후 ct2 변환 각 체크포인트에 해당하는 데이터셋 넣고 int8 양자화. 영어는 distill-whisper 사용**
 
 ## 번역 관련
 - mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 
