@@ -19,7 +19,8 @@
 ---
 
 # TODO
-- 
+- 코토바, wx, faster, pwcpp 등 긴 오디오에 밴치마크. 특히 코토바는 빠르긴 한데 성능도 나은지 확인
+- wx 파이프라인 구조 분석. temp fallback나 문맥 유지가 끊겨있는 듯
 
 ---
 # 전사 파이프라인
@@ -33,8 +34,10 @@
 
 ## 배치 전사
 - 사용 고려 중인 엔진: hf, pwcpp, wx, faster, ~~insanely~~(이건 분석은 해보겠지만 그냥 hf 최적화인듯)
+- 가벼워야 배치 많이 만들어서 빨라진다.
 
 ## 강제 정렬
+- 여기나 화자분리에서도 optimum, ct2 등의 최적화를 내가 적용할 수 있는지 >> 되면 아예 새 파이프라인으로 만들기
 
 ## 화자 분리
 
@@ -82,6 +85,7 @@
 참고로 ct2 변환에 특정 파일들 만드는 명령어 없으면 터진다.
 
 ### distil-whisper
+- distil-whisper ct2나 ggml 있는지 확인
 영어만 가능함. [hf hub](https://huggingface.co/distil-whisper) 참고.
 
 ## 양자화
