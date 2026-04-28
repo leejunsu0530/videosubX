@@ -4,13 +4,35 @@
 - whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
 - diarize 모델과 vad 각각 구현
 
+- whisper int8 ct2 모델 fw에서 테스트 후 리포로 올리기. gpu+ov는 구현 어려워서 그냥 whisperx로
+
+## 목표 및 과정: 
+1. kotoba 최적화 혹은 작은 모델로 학습,
+2. 일본어 구어체 어뎁터, 특정 도메인 어뎁터 차례대로 적용. (아마 LoRA)
+3. 각 체크포인트에 해당하는 데이터셋 넣고 int8 양자화.
+4. ct2 변환. 
+
+**양자화 등의 과정에 따라 lora 효과가 감소할 수 있음. 올바른 방법 찾아보기.**
+
+영어는 distill-whisper 사용
+
+## 번역 관련
+- mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 
+- marianMT는 몇백~몇천만 문장 데이터셋이 필요. 
+- nllb 또는 mbart + lora fine-tuning + int8로 사용
+
 ## whisper 관련 메모
 TODO:
 1. whisper의 NPU 지원 테스트. 이게 안되면 뒤에 과정 필요없이 whisper.cpp나 faster-whisper로.
 > **시도해봤는데 안돼서 xpu 넣고 해보고, 나오는 성능과 저울질해서 whisperx나 pwcpp int8 멀티스레딩과 비교할듯**
-2. 벤치마킹으로 tiny, base, ..., turbo 실 수치 확인. 가장 적합한 모델을 골라야 함
-3. 코토바 데이터로 whisper 파인튜닝
-4. 중오: diarize npu지원 확인
+
+- 1.xpu 사용
+- 2.cpu 사용
+- a) ov cpu 사용시 pwcpp
+- b) 그냥 프레임워크의 완성도와 이점은 wx
+- c) xpu 쓰려면 optimum.intel
+- 어느 쪽이든 int8로 양자화는 하고, 코토바 파인튜닝 필요
+
 
 일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
 - ctranslate2
