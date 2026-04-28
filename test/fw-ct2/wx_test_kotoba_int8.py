@@ -1,6 +1,6 @@
 
 import whisperx
-# from whisperx.asr import WhisperModel
+from whisperx.asr import WhisperModel
 import gc
 # from whisperx.diarize import DiarizationPipeline
 import torch
@@ -30,8 +30,10 @@ model = whisperx.load_model(
     # MODEL_PATH,
     MODEL_ID,
     device, compute_type=compute_type,
-    language='ja'
-)
+    vad_method='silero',  # 기본은 pyannote
+    language='ja',
+
+)  # wx는 성능 좋지만, 자세한 인자 설정은 fw가 앞서는 듯(예시로, 여긴 multilingual 설정이 있음). 내가 만들어야 하나?
 
 # save model to local path (optional)
 # model_dir = "/path/"
@@ -40,7 +42,9 @@ model = whisperx.load_model(
 audio = whisperx.load_audio(audio_file)
 print("오디오 로딩 완료")
 result = model.transcribe(audio, batch_size=batch_size,
-                          print_progress=True)
+                          print_progress=True,
+                          combined_progress=True,
+                          verbose=True)  # combined는 progress 켜져야 사용됨. verbose면 내용 등 자세히 출력됨
 print(result["segments"])  # before alignment
 
 # delete model if low on GPU resources
