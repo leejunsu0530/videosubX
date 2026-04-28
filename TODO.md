@@ -1,68 +1,106 @@
+# TOC
+- [TODO](#TODO)
+- [전사 파이프라인](#전사-파이프라인)
+    - [오디오 로딩](#오디오-로딩)
+    - [VAD](#vad)
+    - [배치 전사](#배치-전사)
+    - [강제 정렬](#강제-정렬)
+    - [화자 분리](#화자-분리)
+- [whisper 모델 성능 개선](whisper-모델-성능-개선)
+    - [가속 방법](#가속-방법)
+    - [파인튜닝](#파인튜닝)
+        - [어댑터(lora)](#어댑터lora)
+        - [kotoba-whisper](#kotoba-whisper)
+        - [distil-whisper](#distil-whisper)
+    - [양자화](#양자화)
+- [번역](#번역)
+- [기타](#기타)
 
-## TODO
-- 전사 base 만들기
-- whisper나 kotoba, 양자화 등은 hf에서도 되니까 pwcpp에서 온전히 사용 못하면 이쪽으로
-- diarize 모델과 vad 각각 구현
+---
 
-- whisper int8 ct2 모델 fw에서 테스트 후 리포로 올리기. gpu+ov는 구현 어려워서 그냥 whisperx로
+# TODO
+- 
 
-## 목표 및 과정: 
-1. kotoba 최적화 혹은 작은 모델로 학습,
-2. 일본어 구어체 어뎁터, 특정 도메인 어뎁터 차례대로 적용. (아마 LoRA)
-3. 각 체크포인트에 해당하는 데이터셋 넣고 int8 양자화.
-4. ct2 변환. 
+---
+# 전사 파이프라인
+- 전사 파이프라인 만들기: 메모리 고려한 로딩, VAD, 배치 전사, 강제 정렬, 화자 분리
 
-**양자화 등의 과정에 따라 lora 효과가 감소할 수 있음. 올바른 방법 찾아보기.**
+## 오디오 로딩
+- 메모리를 고려하는 로딩 필요. 너무 크면 터지니까.
+- vad를 거친 후에야 문장이 잘리지 않게 할 수 있음.
 
-영어는 distill-whisper 사용
+## VAD
 
-## 번역 관련
-- mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 
-- marianMT는 몇백~몇천만 문장 데이터셋이 필요. 
-- nllb 또는 mbart + lora fine-tuning + int8로 사용
+## 배치 전사
+- 사용 고려 중인 엔진: hf, pwcpp, wx, faster, ~~insanely~~(이건 분석은 해보겠지만 그냥 hf 최적화인듯)
 
-## whisper 관련 메모
-TODO:
-1. whisper의 NPU 지원 테스트. 이게 안되면 뒤에 과정 필요없이 whisper.cpp나 faster-whisper로.
-> **시도해봤는데 안돼서 xpu 넣고 해보고, 나오는 성능과 저울질해서 whisperx나 pwcpp int8 멀티스레딩과 비교할듯**
+## 강제 정렬
 
-- 1.xpu 사용
-- 2.cpu 사용
-- a) ov cpu 사용시 pwcpp
-- b) 그냥 프레임워크의 완성도와 이점은 wx
-- c) xpu 쓰려면 optimum.intel
-- 어느 쪽이든 int8로 양자화는 하고, 코토바 파인튜닝 필요
+## 화자 분리
 
+---
 
-일단 hf의 whisper를 기본으로 해서 제작. 가능한 최적화:
+# whisper 모델 성능 개선
+- 일단 hf는 복잡해서 보류. 특히 optimum intel은. 
+
+## 가속 방법
+일단 NPU는 사용 실패.
 - ctranslate2
-- optimum(ct2와 양립 불가)
+- optimum(ct2와 양립 불가) -> intel or cuda 둘다 가능.
+    - intel cpu 말고 xpu 사용 
 - onnx
+- ggml > pwcpp
 - 양자화
-- 파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)
-- accelerate 이건 또 뭐야
-> distill-whisper는 영어만 지원함
+- torch의 intel 또는 cuda
+- ~~파인튜닝(kotoba를 사용해서? https://ysg2997.tistory.com/53 참고)~~ 사실 이건 가속은 아니지. 중첩되니까.
+- accelerate (?)
+- flash_attention_2 (?)
 
-> 엔비디아가 되면 그냥 다른 cuda 지원 구현들을 쓰면 되고, hf에서 날것 그대로 쓰는 건 optimum의 ov 지원을 위해서다.
+참고:
 
-npu에서 whisper 지원 x면 pipe 따로 만들지 말고 whisperx에서 내가 학습시킨 코토바 넣고 사용. 더 성능을 높일 수 없으면 저 파이프라인이 최선이니까. faster-whisper의 whispermodel을 상속한 whisperx의 모델 클래스는 경로로 지정이 가능함.
+```python
+# insanely-faster-whisper에 있는 허깅페이스의 코드.
+    model_kwargs={"attn_implementation": "flash_attention_2"} if is_flash_attn_2_available() else {"attn_implementation": "sdpa"},
+```
 
-## 전사 관련
-- [ ] Base에서 asr, vad, 화자분리, 강제정렬을 별도 클래스로 만들고 Base를 파이프라인으로 만들어서 조립
-- [ ] asr은 whisperx, hf(+intel optimum), faster-whisper, whisper.cpp 지원
-- [ ] 파인튜닝, 양자화 지원
+## 파인튜닝
+1. kotoba를 어떻게든 가볍게 만듦
+2. 어댑터를 적용함
+3. 데이터셋을 사용하는 양자화로 각 체크포인트를 int8 양자화함
+4. ct2 변환
+**주의: 양자화는 lora 효과를 감소시킴. 특히 여러 겹일때는.**
+작게 모델을 만들면 int8 필요 없을지도?
 
-### 번역 관련
-- [ ] hf 기반 번역기 지원
-- [ ] 파인튜닝, 양자화 지원
-- [ ] 구글, deepl, marianMT, NLLB, MBart 등 다양한 번역기 지원
+### 어댑터(LoRA)
+일본어 모델에 구어체 어댑터, 특정 인물 어댑터 차례대로 적용
 
-### 이미지 처리 관련
+### kotoba-whisper
+> 참고: https://github.com/kotoba-tech/kotoba-whisper
+
+1. kotoba 더 최적화(더 잘라내기?)
+2. 작은 모델(base, small)로 다시 학습
+참고로 ct2 변환에 특정 파일들 만드는 명령어 없으면 터진다.
+
+### distil-whisper
+영어만 가능함. [hf hub](https://huggingface.co/distil-whisper) 참고.
+
+## 양자화
+ct2는 자체 양자화 된다.
+
+---
+
+# 번역
+- mbart, marian, nllb, JapaneseBart 등으로 품질 테스트, 일본어 구어체 튜닝 + 특정 인물/도메인 튜닝. 
+- marianMT는 새 언어쌍 만들려면 몇백~몇천만 문장 데이터셋이 필요하다 함.
+- nllb 또는 mbart + lora fine-tuning + int8로 사용
+- 구글, deepl, gpt 지원
+
+---
+
+# 기타
+
+## 이미지 처리 관련
 - [ ] paddleocr 기반 이미지/영상 자막 생성 지원
-
-### 기타
-- [ ] cuda 지원
-- [ ] pypi 지원
 
 ## yt-dlp 관련
 - [x] 플레이리스트를 개별 영상 파일들로 쪼개기
@@ -78,4 +116,5 @@ npu에서 whisper 지원 x면 pipe 따로 만들지 말고 whisperx에서 내가
 - [ ] exe 파일로 사용할 경우에 라이브러리 업데이트가 안되니까, 외부 ytdlp 경로와 연결 가능하게 하기
 - [ ] 버전 확인 및 업데이트 스크립트
 - [ ] 외부 경로 쪽 관리 스크립트
+
 
