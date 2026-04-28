@@ -1,5 +1,7 @@
 # translate-video
 
+[TODO](/TODO.md)
+
 오디오를 전사하고, 이미지와 오디오의 텍스트를 번역하여 ass 자막파일로 만들거나 영상에 삽입하는 파이썬 라이브러리
 A bundle of diverse features: whisper based transcription, translation, OCR, video download and manage
 <!--여기 toc와 작동가능 환경 등 표시하는 스크립트 만들기-->
