@@ -11,6 +11,9 @@ from pathlib import Path
 import numpy as np
 import logging
 from ..utils.types import ParameterSpec
+from transformers import Pipeline
+from transformers.pipelines.pt_utils import PipelineIterator
+
 
 
 @dataclass(slots=True)
@@ -62,6 +65,13 @@ class AsrBase:
     CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
 
 
+class BatchedAsrPipeline:
+    """
+    새 배치 파이프라인: 배치를 하면서도 문맥 고려 기능 유지
+    """
+    CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
+
+
 class AlignModelBase:
     CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
 
@@ -81,7 +91,14 @@ class DiarizeModelBase:
 class TranscribePipeline:
     CONFIG_SCHEMA: dict[str, ParameterSpec] = {}
 
-    pass
+    def __init__( # 이거 그냥 부모로 지정해도 되던가?
+            self,
+            vad_model: VadBase,
+            asr_model: BatchedAsrPipeline | AsrBase,
+            align_model: AlignModelBase,
+            diarize_model: DiarizeModelBase | None
+    ):
+        pass
 
 
 """
