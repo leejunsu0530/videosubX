@@ -18,7 +18,15 @@
 
 ---
 
-# TOD
+# TODO
+- [rapidfuzz](https://github.com/rapidfuzz/RapidFuzz)사용한 yt-dlp 명령어 검색 및 자동완성 기능
+    - 동적 gradio gui도 만들기
+    - 카테고리별 검색기능
+    - 설명 등으로도 검색
+    - 옵션 추가인자 띄우기, 타입도 지원
+    - alias, 프리셋 지원
+    - 
+- 이미지 잔뜩 동적으로 gradio에서 띄워도 되나
 - 코랩에서 gpu로 속도 테스트
 - fw에서 배치와 배치 없이 두 경우에서 여러 모델 성능 테스트
 - 프롬프트 기능 테스트
