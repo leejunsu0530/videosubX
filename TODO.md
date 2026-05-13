@@ -21,7 +21,22 @@
 # TODO
 - 플리 정보는 올바르게 가져오면서 영상 정보는 안 가져오거나 하는게 있나? extract-flat이면 상한에 잘 안 걸릴 수는 있는데 정보가 부족해짐. 플리로써가 아니라 개별 영상으로써 다운받는 거면 상관없지만.
     - 현재 목표했던, 자세한 다운로드 방법: **flat없이, 내가 기록하는 게 아니라 write-info-json 사용해서 개별 영상 기록.** 혹시 시점을 뒤로 당기면(이게 되는지부터 의문이지만) 내가 기록할 때도 플리 데이터도 들어가나?(물론 이 경우에도 flat 없는 기준)
-    - **[flat없이, 자동 기록으로 플리&영상 데이터 적힌 경우](./test/output/auto_write_no_flat/문과&이과%20[PLDUgRz_joPOUCB0kBGAM9nVA8LEISGiDi].info.json)에서, 플리만 자세하게 저장하고 영상은 안 불러온 채 끝낼 수 있으면?**
+    - ~~[flat없이, 자동 기록으로 플리&영상 데이터 적힌 경우](./test/output/auto_write_no_flat/문과&이과%20[PLDUgRz_joPOUCB0kBGAM9nVA8LEISGiDi].info.json)에서, 플리만 자세하게 저장하고 영상은 안 불러온 채 끝낼 수 있으면?~~ 이건 그냥 flat한 플리데이터임. 내부 구조 분석해서 수동과 무슨 차이인건지 찾기. 그리고 플리 있도록 하는 경우에 추가되는 데이터는 아마 이게 전부인 것 같은데, 플리 업로더는 그냥 플리에서의 업로더(채널이 아니라)로 해서, 인덱스(스레딩하는 경우에 애매함)만 빼고 나머지는 확실하게 내가 수동으로 넣을 수 있음.
+        ```json
+            "playlist_count": 7,
+            "playlist": "문과&이과",
+            "playlist_id": "PLDUgRz_joPOUCB0kBGAM9nVA8LEISGiDi",
+            "playlist_title": "문과&이과",
+            "playlist_uploader": "문과vs이과",
+            "playlist_uploader_id": "@vs-bi8bi",
+            "playlist_channel": "문과vs이과",
+            "playlist_channel_id": "UCa4Dk0DO3-n7rpeeGYNHnSg",
+            "playlist_webpage_url": "https://www.youtube.com/playlist?list=PLDUgRz_joPOUCB0kBGAM9nVA8LEISGiDi",
+            "n_entries": 7,
+            "playlist_index": 1,
+            "display_id": "5LaheFrkDjA",
+
+        ```
     - 테스트할 것:
         - 수동 기록의 경우에 옵션을 넣어도 왜 개별 영상을 작성 안하는지(왜 달라지는지)
         - 개별 영상에 url 등의 방법으로 플리 데이터를 추가할 수 있는지
@@ -29,6 +44,7 @@
         - codex 사용해서 구조 분석
         - extract_info와 download에서의 기능 차이가 생기는지
         - extract_info의 download 옵션을 끄면 생기는 일(skip-download 있을 경우)
+        - 자동기록일때 스레딩 같은거 될지
 - [rapidfuzz](https://github.com/rapidfuzz/RapidFuzz)사용한 yt-dlp 명령어 검색 및 자동완성 기능
     - 동적 gradio gui도 만들기
     - 카테고리별 검색기능
