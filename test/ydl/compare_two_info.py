@@ -35,5 +35,9 @@ manual_write_no_flat = read_dict_from_json(
 # df_manual = DataFrame(manual_write_no_flat)
 # df_auto.head()
 # df_manual.head()
-print(auto_write_no_flat.keys())
-print(manual_write_no_flat.keys())
+manual_keys = list(manual_write_no_flat.keys())
+auto_keys = list(auto_write_no_flat.keys())
+print(
+    f"자동 > 수동: {manual_keys in auto_keys}",
+    f"수동 > 자동: {auto_keys in manual_keys}"
+)
