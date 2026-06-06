@@ -19,6 +19,10 @@
 ---
 
 # TODO
+- 다른 기초 작업 하기
+- 파이프라인: 특정 인물 특화 어댑터 적용 kotoba whisper > wx로 전사(옵션 프리셋 추가) > [llama나 qwen으로 수정](https://gemini.google.com/share/e9fa3524b71d)(사용자 정의 사전 등)
+
+
 - [로깅 만들기](https://gemini.google.com/share/bcf7563b2530)
 - 유튜브 부분 제작
 - colab 부분 제작
