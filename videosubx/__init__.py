@@ -1,4 +1,3 @@
-# pylint: disable=wrong-import-position
 import warnings  # surpress torchaudio deprecation warning
 from importlib.metadata import version, PackageNotFoundError
 from rich.console import Console
