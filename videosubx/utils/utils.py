@@ -32,5 +32,5 @@ def read_json(path: str | Path, encoding: str = 'utf-8') -> dict:
         raise FileNotFoundError(f"주어진 경로 {path}에 파일이 없습니다.")
     else:
         with path.open('r', encoding=encoding) as file:
-            dict_: dict = json.load(str(file))
+            dict_: dict = json.load(file)
         return dict_

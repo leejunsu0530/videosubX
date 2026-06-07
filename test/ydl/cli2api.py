@@ -57,7 +57,6 @@ def parse_cli_args(cli_args: str, cli_defaults=False) -> dict[str, object]:
 
 
 if __name__ == "__main__":
-
-    opts = input(">>> yt-dlp ")
+    opts = input("> yt-dlp ")
     api_opts = parse_cli_args(opts)
     pprint(api_opts)
