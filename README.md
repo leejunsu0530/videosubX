@@ -1,4 +1,4 @@
-# translate-video
+# VideosubX
 
 [TODO](/TODO.md)
 
@@ -65,7 +65,8 @@ flowchart TD
     OUT2 --> END
       
 ```
-
+- 번역 시 번역 LLM은 사용자 정의 용어집과 인터넷 검색 tool calling 사용
+- 번역 모델과 전사 모델 모두 파인튜닝 및 양자화 지원
 
 
 1. [WhisperX](https://github.com/m-bain/whisperX) 기반 오디오 전사
