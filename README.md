@@ -10,6 +10,64 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
 <!--i18n으로 자동번역 추가-->
 ## features
 
+```mermaid
+flowchart TD
+    A[오디오]
+
+    subgraph 전사
+        B[배경음 제거]
+        C[VAD<br/>음성 구간 추출]
+        X{전사 엔진 선택}
+        D1[Huggingface 모델 기반 전사]
+        D2[WhisperX 기반 전사]
+        D3[Whisper.cpp 기반 전사]
+        E[단어 수준 정렬]
+        F[화자 분리]
+        G[JSON 형식 출력]
+
+        B --> C
+        C --> X
+        X --> D1 --> E
+        X --> D2 --> E
+        X --> D3 --> E
+        E -.->|화자 분리 선택시| F -.-> G
+        E --> G
+        
+    end
+
+    subgraph 번역
+        IN1{번역 모델 선택}
+        H1[NLLB 기반 번역]
+        H2[Gemini 기반 번역]
+        OUT1[번역된 JSON 파일]
+
+        IN1 --> H1 --> OUT1
+        IN1 --> H2 --> OUT1
+        
+    end
+
+    subgraph 후처리
+        IN2{출력 형식 선택}
+        J1[.ass]
+        J2[.srt]
+        OUT2[출력]
+
+        IN2 --> J1 --> OUT2
+        IN2 --> J2 --> OUT2
+    end
+
+    END[완료]
+
+      
+    A --> B
+    G --> IN1
+    OUT1 --> IN2
+    OUT2 --> END
+      
+```
+
+
+
 1. [WhisperX](https://github.com/m-bain/whisperX) 기반 오디오 전사
 2. [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)을 통한 비디오 텍스트 검출 및 인식
 3. HuggingFace Hub 및 api 기반 번역기를 통한 다국어 텍스트 번역
