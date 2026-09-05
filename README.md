@@ -11,6 +11,7 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
 ## features
 
 [genai 사용](https://github.com/googleapis/python-genai)
+문장 부호 찍어주는 ai나 알고리즘 > 자막을 문장단위로 끊기.
 ```mermaid
 flowchart TD
     A[오디오]
