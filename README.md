@@ -10,6 +10,7 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
 <!--i18n으로 자동번역 추가-->
 ## features
 
+[genai 사용](https://github.com/googleapis/python-genai)
 ```mermaid
 flowchart TD
     A[오디오]
