@@ -9,6 +9,9 @@ A bundle of diverse features: whisper based transcription, translation, OCR, vid
 <!--여기 toc와 작동가능 환경 등 표시하는 스크립트 만들기-->
 <!--i18n으로 자동번역 추가-->
 ## features
+npu 사용 시도
+파인튜닝
+유튜브쪽 구현
 
 [genai 사용](https://github.com/googleapis/python-genai)
 문장 부호 찍어주는 ai나 알고리즘 > 자막을 문장단위로 끊기.
