@@ -1,0 +1,1 @@
+# https://medium.com/@anitaliubfsu/fine-tuning-whisper-with-lora-c796781f00f5
